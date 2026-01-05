@@ -103,6 +103,17 @@ async fn it_can_produce_and_fetch() -> Result<(), Box<Error>> {
     assert_eq!(record.key, key);
     assert_eq!(record.value, value);
 
+    //
+    // Delete topic
+    //
+    prelude::delete_topics(
+        conn.clone(),
+        CORRELATION_ID,
+        CLIENT_ID,
+        vec![topic.as_str()],
+    )
+    .await?;
+
     Ok(())
 }
 
